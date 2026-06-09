@@ -1,42 +1,110 @@
-# Cloud-Agnostic Architecture Design Document
+# Cloud-Agnostic Architecture Design Document (ADD)
 
 ## Purpose
 
-This document describes a cloud-agnostic architecture for bursting Electronic Design Automation (EDA) workloads from on-premises HPC environments into public cloud infrastructure.
+This Architecture Design Document defines a cloud-agnostic reference architecture for extending Electronic Design Automation (EDA) workloads from on-premises High Performance Computing (HPC) environments into public cloud infrastructure.
 
-## Design Principles
+The design supports AWS and Google Cloud Platform implementations while minimizing platform-specific dependencies.
 
-* Cloud Agnostic
-* Infrastructure as Code
-* Security by Design
-* Elastic Scalability
-* Cost Optimization
-* Operational Simplicity
+---
 
-## Architecture Components
+# Architecture Principles
 
-### User Access Layer
+## Cloud Agnostic
 
-Purpose:
+Workloads should remain portable across cloud providers.
+
+## Elastic by Design
+
+Compute resources should scale dynamically based on workload demand.
+
+## Infrastructure as Code
+
+All infrastructure components should be provisioned through Terraform.
+
+## Security First
+
+Security controls must be integrated into every architectural layer.
+
+## Cost Efficient
+
+Burst capacity should leverage spot or preemptible resources where appropriate.
+
+---
+
+# Logical Architecture
+
+Users
+
+↓
+
+On-Prem HPC Environment
+
+↓
+
+Hybrid Connectivity Layer
+
+↓
+
+Cloud Control Plane
+
+↓
+
+Scheduler Layer
+
+↓
+
+Elastic Compute Layer
+
+↓
+
+Shared Storage Layer
+
+↓
+
+Object Storage Layer
+
+↓
+
+Analytics Layer
+
+↓
+
+AI Optimization Layer
+
+---
+
+# User Access Layer
+
+Responsibilities:
 
 * Secure engineering access
 * Job submission
-* Monitoring
+* Operational monitoring
 
-### Hybrid Connectivity Layer
+Capabilities:
+
+* Single Sign-On
+* Multi-Factor Authentication
+* Role-Based Access Control
+
+---
+
+# Connectivity Layer
 
 Purpose:
 
-* Connect on-premises and cloud environments
-* Support low-latency license communication
+Provide secure, low-latency communication between on-premises and cloud resources.
 
-Technologies:
+Supported Technologies:
 
 * AWS Direct Connect
-* Cloud Interconnect
-* VPN
+* Google Cloud Interconnect
+* IPSec VPN
 
-### Scheduler Layer
+---
+
+# Scheduler Layer
 
 Supported Platforms:
 
@@ -46,80 +114,124 @@ Supported Platforms:
 Responsibilities:
 
 * Queue management
-* Job scheduling
 * Resource allocation
-* Cloud burst triggering
+* Cloud burst orchestration
+* License-aware scheduling
 
-### Compute Layer
+---
+
+# Compute Layer
 
 Purpose:
 
-* Dynamic HPC worker provisioning
+Provide elastic HPC compute resources.
 
 Capabilities:
 
+* Dynamic node provisioning
 * Auto scaling
 * Spot compute utilization
-* Parallel workload execution
+* High-performance execution
 
-### Shared Storage Layer
+Supported Workloads:
 
-Purpose:
+* RTL simulation
+* Physical verification
+* Timing analysis
+* Place-and-route
+* DRC/LVS
 
-* Shared file access
-* Design artifact management
+---
+
+# Shared Storage Layer
 
 Requirements:
 
 * POSIX compliance
-* NFS support
+* High throughput
 * Snapshot capabilities
+* Shared access
 
-### Object Storage Layer
+Examples:
+
+AWS:
+
+* EFS
+* FSx for NetApp ONTAP
+
+GCP:
+
+* Filestore
+* Cloud NetApp Volumes
+
+---
+
+# Object Storage Layer
 
 Purpose:
 
-* Long-term storage
-* Backup
-* Analytics
+* Input data storage
+* Output artifact storage
+* Backup and archival
+* Analytics integration
 
-### Analytics Layer
+Examples:
+
+AWS:
+
+* Amazon S3
+
+GCP:
+
+* Cloud Storage
+
+---
+
+# Analytics Platform
 
 Capabilities:
 
-* Utilization analytics
+* Cluster utilization analysis
 * Queue analytics
-* License analytics
-* Cost analytics
+* License utilization analysis
+* Cost optimization analytics
 
-### AI Optimization Layer
+---
+
+# AI Optimization Layer
 
 Capabilities:
 
 * Runtime prediction
 * Capacity forecasting
 * Anomaly detection
+* Scheduling optimization
 
-## Security Architecture
+---
 
-Identity:
+# Security Architecture
+
+Identity Controls:
 
 * SSO
 * MFA
 * RBAC
 
-Network:
+Network Controls:
 
-* Private connectivity
+* Private networking
 * Segmentation
-* Zero Trust
+* Zero Trust principles
 
-Data:
+Data Protection:
 
 * Encryption at rest
 * Encryption in transit
+* Centralized key management
 
-## High Availability
+---
+
+# High Availability
 
 Target Availability:
 
@@ -131,20 +243,32 @@ Strategies:
 * Storage redundancy
 * Scheduler failover
 
-## Disaster Recovery
+---
 
-Target RPO: 15 Minutes
+# Disaster Recovery
 
-Target RTO: 1 Hour
+Target RPO:
 
-## Cost Optimization
+15 Minutes
 
-* Spot Instances
+Target RTO:
+
+1 Hour
+
+---
+
+# Cost Optimization
+
+Strategies:
+
+* Spot instances
 * Preemptible VMs
-* Tiered Storage
-* Automated Resource Cleanup
+* Storage lifecycle policies
+* Automated resource cleanup
 
-## Future Evolution
+---
+
+# Future Evolution
 
 Phase 1 – HPC Bursting
 
@@ -152,6 +276,6 @@ Phase 2 – Analytics
 
 Phase 3 – Predictive AI
 
-Phase 4 – Generative AI
+Phase 4 – Generative AI Assistant
 
 Phase 5 – Agentic Operations
