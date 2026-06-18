@@ -296,3 +296,70 @@ Phase 3 – AI Optimization
 Phase 4 – Generative AI Engineering Assistant
 
 Phase 5 – Agentic HPC Operations
+# Burst Compute Architecture
+
+## Foundation Infrastructure
+
+Provisioned Once
+
+Components:
+
+* VPC
+* Subnets
+* Route Tables
+* Security Groups
+* Direct Connect
+* FSx Storage
+* EFS
+* Monitoring Services
+
+Managed using Terraform Foundation Modules.
+
+---
+
+## Ephemeral Burst Infrastructure
+
+Provisioned On Demand
+
+Components:
+
+* EC2 Spot Instances
+* Auto Scaling Groups
+* Temporary Scratch Storage
+* Job-Specific Worker Nodes
+
+Provisioned through:
+
+* Slurm Resume Program
+* LSF Resource Connector
+* Terraform Automation
+
+Destroyed automatically after workload completion.
+
+---
+
+## Burst Workflow
+
+1. Job submitted.
+2. Scheduler detects insufficient capacity.
+3. Burst Controller initiates Terraform Apply.
+4. EC2 workers are provisioned.
+5. Workload executes.
+6. Results stored in FSx or S3.
+7. Terraform Destroy removes compute resources.
+
+---
+
+## Cost Optimization Strategy
+
+Primary Compute:
+
+* Spot Instances
+
+Fallback:
+
+* On-Demand Instances
+
+Expected Cost Reduction:
+
+60–80% versus permanently running cloud clusters.

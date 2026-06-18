@@ -279,3 +279,60 @@ Phase 3 – Predictive AI
 Phase 4 – Generative AI Assistant
 
 Phase 5 – Agentic Operations
+# Burst Orchestration Layer
+
+## Purpose
+
+The Burst Orchestration Layer enables dynamic provisioning and deprovisioning of cloud infrastructure based on HPC workload demand.
+
+Rather than maintaining permanently running cloud compute resources, the platform creates compute capacity only when required and automatically removes resources after job completion.
+
+---
+
+## Components
+
+### Queue Monitor
+
+Monitors:
+
+* Queue depth
+* Pending jobs
+* Wait time thresholds
+* Resource availability
+
+### Burst Decision Engine
+
+Evaluates:
+
+* Available on-prem capacity
+* Cloud costs
+* License availability
+* Job priority
+
+Determines whether workloads should execute on-premises or in cloud resources.
+
+### Infrastructure Automation Layer
+
+Responsible for:
+
+* Terraform Apply
+* Terraform Destroy
+* Cloud API orchestration
+
+### Lifecycle Manager
+
+Responsibilities:
+
+* Provision compute
+* Monitor execution
+* Archive outputs
+* Cleanup resources
+
+---
+
+## Benefits
+
+* Reduced cloud costs
+* Elastic scalability
+* Improved resource utilization
+* Automated operations
